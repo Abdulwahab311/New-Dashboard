@@ -6,7 +6,7 @@ const Sidebar = ({ sidebarOpen, onSidebarClose }) => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  const icons = useMemo(() => [
+ const icons = useMemo(() => [
   {
     id: "stats",
     src: "https://img.icons8.com/ios-filled/50/ffffff/bar-chart.png",

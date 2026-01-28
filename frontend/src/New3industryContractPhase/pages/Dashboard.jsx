@@ -12,7 +12,7 @@ const DashboardHealthCare = () => {
       <div className="w-full p-1 py-1">
         <div className="flex flex-col lg:flex-row gap-6 items-stretch">
           {/* DurationQuarter Card */}
-          <div className="bg-[#090D28] rounded-2xl p-4 md:p-6 flex-[2] lg:flex-[3] min-w-0">
+          <div className="bg-[#090D28] rounded-2xl p-4 md:p-4 flex-[2] lg:flex-[3] min-w-0">
             <DurationQuarter />
           </div>
 
@@ -23,10 +23,10 @@ const DashboardHealthCare = () => {
         </div>
       </div>
 
-      <div className="mt-6 flex flex-col lg:flex-row gap-4">
+      <div className="mt-2  flex flex-col lg:flex-row gap-4">
         <div className="flex-1 min-w-0 overflow-hidden">
           <Exit
-            title="ACTIVE DEALS NEW INDUSTRIE 4. PASSEREN/REGISTRATIE"
+            title="ACTIVE DEALS INDUSTRIE 3. CONTRACTEN / ONTWIKKELING"
             label="Internal Research"
             counts={{ red: 2, orange: 1, blue: 1 }}
           />

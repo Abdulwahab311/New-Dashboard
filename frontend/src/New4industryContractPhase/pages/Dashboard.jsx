@@ -26,7 +26,7 @@ const DashboardHealthCare = () => {
       <div className="mt-6 flex flex-col lg:flex-row gap-4">
         <div className="flex-1 min-w-0 overflow-hidden">
           <Exit
-            title="ACTIVE DEALS NEW INDUSTRIE 4. PASSEREN/REGISTRATIE"
+            title="ACTIVE DEALS NEW ZORG 4. PASSEREN/REGISTRATIE "
             label="Internal Research"
             counts={{ red: 2, orange: 1, blue: 1 }}
           />

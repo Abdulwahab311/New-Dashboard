@@ -7,10 +7,32 @@ const Sidebar = ({ sidebarOpen, onSidebarClose }) => {
   const location = useLocation();
   
   const icons = useMemo(() => [
-    { id: "stats", src: "/icons/stats.png", alt: "stats", path: "/afterSales/dashboard" },
-    { id: "search", src: "/icons/search.png", alt: "search", path: "/afterSales/search" },
-    { id: "file", src: "/icons/file.png", alt: "file", path: "/afterSales/files" },
-  ], []);
+  {
+    id: "stats",
+    src: "https://img.icons8.com/ios-filled/50/ffffff/bar-chart.png",
+    alt: "stats",
+    path: "/afterSales/dashboard",
+  },
+  {
+    id: "search",
+    src: "https://img.icons8.com/ios-filled/50/ffffff/find-user-male.png",
+    alt: "search",
+    path: "/afterSales/search",
+  },
+  {
+    id: "file",
+    src: "https://img.icons8.com/ios-filled/50/ffffff/combo-chart--v1.png",
+    alt: "file",
+    path: "/afterSales/files",
+  },
+  {
+    id: "settings",
+    src: "https://img.icons8.com/ios-filled/50/ffffff/settings.png",
+    alt: "settings",
+    path: "/afterSales/settings",
+  },
+], []);
+
   
   // Set default active based on current route or default to stats
   const getActiveId = () => {

@@ -36,7 +36,6 @@ const RenderAlignedLegend = ({ payload }) => {
   );
 };
 
-
 /* MOCK DATA */
 const MOCK_DEAL_PHASES = [
   {
@@ -180,7 +179,6 @@ const DurationQuarter = () => {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-
           {/* Total Duration Pills */}
           <div>
             <h2 className="text-sm md:text-base font-semibold mb-2">

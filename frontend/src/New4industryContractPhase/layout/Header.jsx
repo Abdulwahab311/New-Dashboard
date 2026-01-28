@@ -22,7 +22,7 @@ const Header = ({ onHamburgerClick }) => {
    
   };
 
-  const headerTitle = titles[location.pathname] || "NEW INDUSTRIE 4. PASSEREN/REGISTRATIE";
+  const headerTitle = titles[location.pathname] || "NEW ZORG 4. PASSEREN/REGISTRATIE";
 
 
   return (
