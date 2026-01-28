@@ -82,15 +82,16 @@ const MOCK_DEAL_PHASES = [
   },
 ];
 
-// Mock chart data for the line graph
-const MOCK_CHART_DATA = [
-  { month: "04/05", value1: 28, value2: 22, value3: 18 },
-  { month: "05/05", value1: 20, value2: 16, value3: 12 },
-  { month: "06/05", value1: 25, value2: 20, value3: 15 },
-  { month: "07/05", value1: 22, value2: 18, value3: 14 },
-  { month: "08/05", value1: 26, value2: 21, value3: 16 },
-  { month: "09/05", value1: 20, value2: 15, value3: 11 },
-];
+
+
+const getLast3Months = () => {
+  const now = new Date();
+
+  return Array.from({ length: 3 }, (_, i) => {
+    const d = new Date(now.getFullYear(), now.getMonth() - (2 - i), 1);
+    return d.toLocaleString("en-US", { month: "short" });
+  });
+};
 
 const DurationQuarter = () => {
   const [dealPhases, setDealPhases] = useState([]);
@@ -98,57 +99,66 @@ const DurationQuarter = () => {
 
   useEffect(() => {
     setDealPhases(MOCK_DEAL_PHASES);
-    setChartData(MOCK_CHART_DATA);
+
+    const months = getLast3Months();
+
+    setChartData(
+      months.map((m) => ({
+        month: m,
+        value1: Math.floor(Math.random() * 30),
+        value2: Math.floor(Math.random() * 25),
+        value3: Math.floor(Math.random() * 20),
+      })),
+    );
   }, []);
 
-  // Calculate average duration
-  const avgDuration = 20;
-
-  const avgGoal = 20;
+  const avgDuration = 27;
+  const avgGoal = 673;
 
   return (
     <div className="text-white w-full h-full">
       <h1 className="text-lg md:text-xl font-bold mb-4">DURATION</h1>
 
       <div className="flex flex-col xl:flex-row gap-4 xl:gap-6">
-        {/* LEFT SECTION - CHART */}
+        {/* LEFT - CHART */}
         <div className="flex-1 min-w-0">
-          {/* Area Chart */}
-          <div className="rounded-xl bg-[#1A1F3A] p-2 md:p-2 mb-4">
+          <div className="rounded-xl bg-[#1A1F3A] p-3 md:p-4 mb-4">
             <ResponsiveContainer width="100%" height={220}>
               <AreaChart data={chartData}>
                 <defs>
-                  <linearGradient id="gradient1" x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#22C55E" stopOpacity={0.6} />
                     <stop offset="95%" stopColor="#22C55E" stopOpacity={0.1} />
                   </linearGradient>
-                  <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.6} />
                     <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.1} />
                   </linearGradient>
-                  <linearGradient id="gradient3" x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#A855F7" stopOpacity={0.6} />
                     <stop offset="95%" stopColor="#A855F7" stopOpacity={0.1} />
                   </linearGradient>
                 </defs>
+
                 <CartesianGrid
                   strokeDasharray="3 3"
                   stroke="#374151"
                   vertical={false}
                 />
+
                 <XAxis
                   dataKey="month"
                   stroke="#9CA3AF"
                   tick={{ fill: "#9CA3AF", fontSize: 10 }}
-                  axisLine={{ stroke: "#374151" }}
                 />
+
                 <YAxis
                   stroke="#9CA3AF"
                   tick={{ fill: "#9CA3AF", fontSize: 10 }}
-                  axisLine={{ stroke: "#374151" }}
                   domain={[0, 30]}
                   ticks={[0, 6, 12, 18, 24, 30]}
                 />
+
                 <Tooltip
                   contentStyle={{
                     backgroundColor: "#1A1F3A",
@@ -157,33 +167,27 @@ const DurationQuarter = () => {
                     fontSize: "12px",
                   }}
                 />
-                {/* <Legend content={<RenderAlignedLegend />} /> */}
+
                 <Area
                   type="monotone"
                   dataKey="value1"
                   stroke="#22C55E"
-                  fill="url(#gradient1)"
-                  name="Dossier registratie in CRM & financieel"
+                  fill="url(#g1)"
                   strokeWidth={2}
-                  dot={{ r: 3, fill: "#22C55E" }}
                 />
                 <Area
                   type="monotone"
                   dataKey="value2"
                   stroke="#3B82F6"
-                  fill="url(#gradient2)"
-                  name="Lopende Zaken"
+                  fill="url(#g2)"
                   strokeWidth={2}
-                  dot={{ r: 3, fill: "#3B82F6" }}
                 />
                 <Area
                   type="monotone"
                   dataKey="value3"
                   stroke="#A855F7"
-                  fill="url(#gradient3)"
-                  name="Plan Fiscaal en Notaris akkoord"
+                  fill="url(#g3)"
                   strokeWidth={2}
-                  dot={{ r: 3, fill: "#A855F7" }}
                 />
               </AreaChart>
             </ResponsiveContainer>
@@ -328,9 +332,7 @@ const DurationQuarter = () => {
                         <div
                           className={`h-[1.5px] rounded ${i === 3 ? "w-3 bg-white" : "w-2 bg-white/60"}`}
                         />
-                        <span className="text-[6px] text-white/70 ml-0.5">
-                          {dayValue}
-                        </span>
+                       
                       </div>
                     );
                   })}

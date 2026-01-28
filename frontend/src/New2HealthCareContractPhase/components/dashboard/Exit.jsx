@@ -60,7 +60,16 @@ export default function Exit({
     <div style={{  borderRadius: "8px", padding: "16px", marginBottom: "16px" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", flex: 1 }}>
-          <span style={{ color: "#FFFFFF", fontSize: "14px", fontWeight: "600" }}>
+         <span
+            style={{
+              color: "#FFFFFF",
+              fontFamily: "DM Sans",
+              fontSize: "28px",
+              fontWeight: "700",
+              lineHeight: "100%",
+              letterSpacing: "0%",
+            }}
+          >
             {title}
           </span>
           

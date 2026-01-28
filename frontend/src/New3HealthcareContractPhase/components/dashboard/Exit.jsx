@@ -5,9 +5,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { REACT_APP_BASEURL } from "../../../config.js";
 
-export default function Exit({ 
-  title = "ACTIEVE DEALS 2e CONTRACTFASE EXIT"
-}) {
+export default function Exit({ title = "ACTIEVE DEALS 2e CONTRACTFASE EXIT" }) {
   const [open, setOpen] = useState(true);
   const [counts, setCounts] = useState({ red: 0, orange: 0, grey: 5 });
   const [loading, setLoading] = useState(true);
@@ -17,18 +15,20 @@ export default function Exit({
       try {
         const res = await axios.get(`${REACT_APP_BASEURL}/sales/getSales`);
         const data = Array.isArray(res.data) ? res.data : res.data.data;
-        
-        const zorgPipeline = data.find((p) => p.pipelineKey?.toLowerCase() === "zorg");
-        
+
+        const zorgPipeline = data.find(
+          (p) => p.pipelineKey?.toLowerCase() === "zorg",
+        );
+
         if (zorgPipeline && zorgPipeline.stages) {
-          let red = 0;      // Deals delayed (>20 days)
-          let orange = 0;   // Deals in progress (1-20 days)
-          let grey = 0;     // Empty stages
+          let red = 0; // Deals delayed (>20 days)
+          let orange = 0; // Deals in progress (1-20 days)
+          let grey = 0; // Empty stages
 
           zorgPipeline.stages.forEach((stage) => {
             const dealCount = stage.count || 0;
             const avgDays = stage.avgTimeToAdvanceDays || 0;
-            
+
             if (dealCount === 0) {
               grey++;
             } else if (avgDays > 20) {
@@ -57,13 +57,35 @@ export default function Exit({
   ];
 
   return (
-    <div style={{  borderRadius: "8px", padding: "16px", marginBottom: "16px" }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "16px", flex: 1 }}>
-          <span style={{ color: "#FFFFFF", fontSize: "14px", fontWeight: "600" }}>
+    <div style={{ borderRadius: "8px", padding: "16px", marginBottom: "16px" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "16px",
+            flex: 1,
+          }}
+        >
+          <span
+            style={{
+              color: "#FFFFFF",
+              fontFamily: "DM Sans",
+              fontSize: "28px",
+              fontWeight: "700",
+              lineHeight: "100%",
+              letterSpacing: "0%",
+            }}
+          >
             {title}
           </span>
-          
+
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             {pills.map((p, i) => (
               <div
@@ -86,7 +108,7 @@ export default function Exit({
             ))}
           </div>
         </div>
-        
+
         {/* <button
           onClick={() => setOpen(!open)}
           style={{

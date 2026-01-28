@@ -5,8 +5,11 @@ const STAGES = [
   { key: "signed", label: "Aankoop / contract" },
   { key: "complete", label: "Kick-off met projectontwikkelaar" },
   { key: "notary", label: "Vergunningaanvraag" },
+  { key: "notary", label: "Ontwikkeling" },
   { key: "transfer", label: "Verhuur" },
   { key: "transfer", label: "Verkoop" },
+  { key: "notary", label: "Financieel/ liquiditeit/ notarieel" },
+
 ];
 
 // 🔹 Mock data
@@ -82,9 +85,9 @@ export default function ActiveDealsTable({ label = "DEAL SPECIFICATIE" }) {
   return (
     <section className="w-full mt-5">
       {/* Header */}
-      <div className="mt-3 w-full rounded-xl px-4 py-3 flex items-center justify-between">
+      <div className="mt-3 w-full bg-[#141936] rounded-xl px-4 py-1 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-white/90 text-lg md:text-xl font-semibold px-3 py-2 rounded-md">
+          <span className="text-white/90  text-lg md:text-xl font-semibold  rounded-md">
             {label}
           </span>
         </div>

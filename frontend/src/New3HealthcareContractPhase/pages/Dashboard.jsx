@@ -23,7 +23,7 @@ const DashboardHealthCare = () => {
         </div>
       </div>
 
-      <div className="mt-6 flex flex-col lg:flex-row gap-4">
+      <div className="mt-2  flex flex-col lg:flex-row gap-4">
         <div className="flex-1 min-w-0 overflow-hidden">
           <Exit
             title="ACTIVE DEALS ZORG 3. CONTRACTEN / ONTWIKKELING"
