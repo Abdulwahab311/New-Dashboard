@@ -185,12 +185,12 @@ const DurationQuarter = () => {
               Total Duration
             </h2>
             <div className="flex gap-3">
-              <div className="px-5 md:px-6 py-2 md:py-2.5 rounded-full bg-[#22C55E] text-center">
+              <div className="px-5 md:px-6 py-2 md:py-2.5 rounded-full bg-[#28A72C] text-center">
                 <div className="text-xs font-medium whitespace-nowrap">
                   Goal: {avgGoal} Days
                 </div>
               </div>
-              <div className="px-5 md:px-6 py-2 md:py-2.5 rounded-full bg-[#EF4444] text-center flex flex-col items-center gap-1">
+              <div className="px-5 md:px-6 py-2 md:py-2.5 rounded-full bg-[#F1494C] text-center flex flex-col items-center gap-1">
                 <div className="text-xs font-semibold text-white whitespace-nowrap">
                   Now: {avgDuration} Days
                 </div>
