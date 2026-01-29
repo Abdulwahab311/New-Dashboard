@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 // import axios from 'axios';
 // import { REACT_APP_BASEURL } from '../../config.js';
 
 const PillarCard = ({ item }) => {
+  const progressPercent = Math.min((item.goal / item.now) * 100, 100);
+
   return (
     <div className="text-white flex flex-col h-[340px]">
-
       {/* GOAL */}
       <div
         className="rounded-xl p-2 mb-2"
-        style={{ backgroundImage: 'linear-gradient(180deg, #090D28 0%, rgba(255,255,255,0.10) 100%)' }}
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, #090D28 0%, rgba(255,255,255,0.10) 100%)",
+        }}
       >
         <div className="text-gray-300 text-[10px] text-center mb-1">GOAL</div>
         <div className="text-white text-xl font-bold text-center">
@@ -17,16 +21,26 @@ const PillarCard = ({ item }) => {
         </div>
       </div>
 
-      {/* GREEN PILLAR */}
-      <div className="bg-[#0B0F24] rounded-lg p-2 flex-1 flex">
-        <div className="w-full h-full bg-[#6FE04F] rounded-lg"></div>
+      {/* BLACK CONTAINER */}
+      <div className="relative bg-[#0B0F24] rounded-lg p-2 flex-1 overflow-hidden">
+        {/* NOW TEXT (INSIDE BLACK) */}
+        <div className="relative z-10 text-center text-[10px] text-black mb-1">
+          Now {item.now} DAYS
+        </div>
+
+        {/* GREEN FILL */}
+        <div className="absolute bottom-2 left-2 right-2 top-2 flex items-end">
+          <div
+            className="w-full bg-[#6FE04F] rounded-lg transition-all duration-500"
+            style={{ height: `${progressPercent}%` }}
+          />
+        </div>
       </div>
 
       {/* TITLE */}
       <div className="mt-2 text-[9px] text-gray-300 text-center uppercase tracking-wide">
         {item.title}
       </div>
-
     </div>
   );
 };
@@ -45,7 +59,7 @@ const Pilars = () => {
       { title: "ZORG PAS & REG", goal: 35, now: 28 },
       { title: "INDUSTRIE OVDER CC ", goal: 7, now: 7 },
       { title: "INDUSTRY CC & DEV", goal: 7, now: 7 },
-      { title: "INDUSTRY PAS & REG", goal: 15, now: 21.6 }
+      { title: "INDUSTRY PAS & REG", goal: 15, now: 21.6 },
     ]);
   };
 

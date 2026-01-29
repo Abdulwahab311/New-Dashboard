@@ -5,58 +5,36 @@ import { useNavigate, useLocation } from "react-router-dom";
 const Sidebar = ({ sidebarOpen, onSidebarClose }) => {
   const navigate = useNavigate();
   const location = useLocation();
-
- const icons = useMemo(() => [
-  {
-    id: "stats",
-    src: "https://img.icons8.com/ios-filled/50/ffffff/bar-chart.png",
-    alt: "stats",
-    path: "/afterSales/dashboard",
-  },
-  {
-    id: "search",
-    src: "https://img.icons8.com/ios-filled/50/ffffff/find-user-male.png",
-    alt: "search",
-    path: "/afterSales/search",
-  },
-  {
-    id: "file",
-    src: "https://img.icons8.com/ios-filled/50/ffffff/combo-chart--v1.png",
-    alt: "file",
-    path: "/afterSales/files",
-  },
-  {
-    id: "settings",
-    src: "https://img.icons8.com/ios-filled/50/ffffff/settings.png",
-    alt: "settings",
-    path: "/afterSales/settings",
-  },
-], []);
-
-
+  
+  const icons = useMemo(() => [
+    { id: "stats", src: "/icons/stats.png", alt: "stats", path: "/afterSales/dashboard" },
+    { id: "search", src: "/icons/search.png", alt: "search", path: "/afterSales/search" },
+    { id: "file", src: "/icons/file.png", alt: "file", path: "/afterSales/files" },
+  ], []);
+  
   // Set default active based on current route or default to stats
   const getActiveId = () => {
     const currentPath = location.pathname;
-    const activeIcon = icons.find((icon) => icon.path === currentPath);
+    const activeIcon = icons.find(icon => icon.path === currentPath);
     return activeIcon ? activeIcon.id : "stats";
   };
-
+  
   const [activeId, setActiveId] = useState(getActiveId());
 
   // Update active state when route changes
   useEffect(() => {
     const currentPath = location.pathname;
-    const activeIcon = icons.find((icon) => icon.path === currentPath);
+    const activeIcon = icons.find(icon => icon.path === currentPath);
     setActiveId(activeIcon ? activeIcon.id : "stats");
   }, [location.pathname, icons]);
+
+  
 
   return (
     <>
       <div
         className={`fixed inset-0 z-40 transition-opacity duration-300 lg:hidden ${
-          sidebarOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+          sidebarOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={onSidebarClose}
       />
@@ -88,11 +66,7 @@ const Sidebar = ({ sidebarOpen, onSidebarClose }) => {
                       isActive ? "bg-[#4C63FF]" : "bg-transparent"
                     }`}
                   >
-                    <img
-                      src={item.src}
-                      alt={item.alt}
-                      className={`w-5 h-5 ${item.id === "search" ? "invert" : ""}`}
-                    />
+                    <img src={item.src} alt={item.alt} className={`w-5 h-5 ${item.id === 'search' ? 'invert' : ''}`} />
                   </span>
                 </button>
               );
@@ -101,18 +75,13 @@ const Sidebar = ({ sidebarOpen, onSidebarClose }) => {
           <button
             type="button"
             aria-label="settings"
-            onClick={() => setActiveId("settings")}
-            className={`transition-opacity mt-10 ${activeId === "settings" ? "" : "opacity-70 hover:opacity-100"}`}
+            onClick={() => setActiveId('settings')}
+            className={`transition-opacity mt-10 ${activeId === 'settings' ? '' : 'opacity-70 hover:opacity-100'}`}
           >
             <span
-              className={`inline-flex items-center justify-center w-9 h-9 rounded-full ${activeId === "settings" ? "bg-[#4563EC]" : "bg-transparent"}`}
+              className={`inline-flex items-center justify-center w-9 h-9 rounded-full ${activeId === 'settings' ? 'bg-[#4563EC]' : 'bg-transparent'}`}
             >
-              <CiSettings
-                size={30}
-                className={
-                  activeId === "settings" ? "text-white" : "text-gray-300"
-                }
-              />
+              <CiSettings size={30} className={activeId === 'settings' ? 'text-white' : 'text-gray-300'} />
             </span>
           </button>
         </div>
