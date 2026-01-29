@@ -7,12 +7,19 @@ import New3dashboard from "./New3HealthcareContractPhase/pages/Dashboard.jsx";
 import New4dashboard from "./New4HealthcareContractPhase/pages/Dashboard.jsx";
 import New4Healthcare from "./New4HealthcareContractPhase/layout/Layout.jsx";
 
-import New2industrydashboard from "./New2industryContractPhase/pages/Dashboard.jsx"
-import New2industrydashboardlayout from "./New2industryContractPhase/layout/Layout.jsx"
-import New3industrydashboard from "./New3industryContractPhase/pages/Dashboard.jsx"
-import New3industrydashboardlayout from "./New3industryContractPhase/layout/Layout.jsx"
-import New4industrydashboard from "./New4industryContractPhase/pages/Dashboard.jsx"
-import New4industrydashboardlayout from "./New4industryContractPhase/layout/Layout.jsx"
+import New2industrydashboard from "./New2industryContractPhase/pages/Dashboard.jsx";
+import New2industrydashboardlayout from "./New2industryContractPhase/layout/Layout.jsx";
+import New3industrydashboard from "./New3industryContractPhase/pages/Dashboard.jsx";
+import New3industrydashboardlayout from "./New3industryContractPhase/layout/Layout.jsx";
+import New4industrydashboard from "./New4industryContractPhase/pages/Dashboard.jsx";
+import New4industrydashboardlayout from "./New4industryContractPhase/layout/Layout.jsx";
+
+import FinancialDashboardlayout from "./FinancialDashboard/layout/Layout.jsx";
+import FinancialDashboard from "./FinancialDashboard/pages/ClientFinancial.jsx";
+
+import FunnelDashboard from "./funnelDashboard/pages/FunnelDashboard.jsx";
+import FunnelLayout from "./New2industryContractPhase/layout/Layout.jsx";
+
 const App = () => {
   return (
     <Router>
@@ -27,7 +34,6 @@ const App = () => {
           }
         />
 
-       
         <Route
           path="/new3healthcare/dashboard"
           element={
@@ -56,7 +62,6 @@ const App = () => {
           }
         />
 
-    
         <Route
           path="/new3industry/dashboard"
           element={
@@ -71,6 +76,24 @@ const App = () => {
             <New4industrydashboardlayout>
               <New4industrydashboard />
             </New4industrydashboardlayout>
+          }
+        />
+
+        {/* Financial Dashboard */}
+        <Route
+          path="/financial/dashboard"
+          element={
+            <FinancialDashboardlayout>
+              <FinancialDashboard />
+            </FinancialDashboardlayout>
+          }
+        />
+        <Route
+          path="/funnel/dashboard"
+          element={
+            <FunnelLayout>
+              <FunnelDashboard />
+            </FunnelLayout>
           }
         />
       </Routes>
