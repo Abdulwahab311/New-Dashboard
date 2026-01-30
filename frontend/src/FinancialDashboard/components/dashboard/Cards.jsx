@@ -47,20 +47,30 @@ const StatCard = ({ title, value, note, change, big, bg }) => {
 
   return (
     <div
-      className={`relative rounded border border-[#252B42] p-3 flex flex-col items-center text-center
+      className={`group relative rounded border border-[#252B42] p-3 flex flex-col items-center text-center
+      transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-pink-500/50
       ${big ? "h-46 w-full" : "w-full"}`}
       style={{ background: bg || "transparent" }}
     >
-      <div className="text-[7px] font-medium tracking-wider text-gray-400 mb-1 text-center truncate">
+      {/* TITLE */}
+      <div
+        className="text-[7px] font-medium tracking-wider text-gray-400 mb-1 truncate
+        transition-all duration-300 group-hover:text-white group-hover:scale-110 group-hover:whitespace-normal"
+      >
         {title}
       </div>
+
+      {/* VALUE */}
       <div
-        className={`text-white ${big ? "text-xl" : "text-base"} font-semibold`}
+        className={`text-white font-semibold truncate
+        transition-all duration-300 group-hover:scale-125 group-hover:whitespace-normal
+        ${big ? "text-xl" : "text-base"}`}
       >
         {value}
       </div>
+
       {(change || note) && (
-        <div className="flex items-center justify-center gap-1 text-[8px] mt-1">
+        <div className="flex items-center justify-center gap-1 text-[8px] mt-1 transition-opacity duration-300 group-hover:opacity-100 opacity-80">
           {change && (
             <span
               className={`font-medium rounded-md px-1 py-0.5 ${
@@ -75,8 +85,10 @@ const StatCard = ({ title, value, note, change, big, bg }) => {
           {note && <span className="text-gray-500">{note}</span>}
         </div>
       )}
+
+      {/* Sparkline */}
       <div
-        className="absolute bottom-0 left-0 mx-auto right-0"
+        className="absolute bottom-0 left-0 right-0 mx-auto"
         style={wrapperStyle}
       >
         <div ref={ref} className="w-full h-full">
@@ -89,7 +101,7 @@ const StatCard = ({ title, value, note, change, big, bg }) => {
             margin={{ top: 0, bottom: -20, left: -8, right: 5 }}
             sx={{
               [`& .${areaElementClasses.root}`]: {
-                opacity: 0.2,
+                opacity: 0.25,
                 filter: "drop-shadow(0 2px 4px rgba(219, 39, 119, 0.3))",
               },
               [`& .${lineElementClasses.root}`]: {
@@ -100,6 +112,9 @@ const StatCard = ({ title, value, note, change, big, bg }) => {
           />
         </div>
       </div>
+
+      {/* Glow overlay */}
+      <div className="pointer-events-none absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition duration-300 bg-pink-500/5" />
     </div>
   );
 };
@@ -232,17 +247,17 @@ export default function Cards() {
     const calculatedBankBalance = Math.abs(
       Number(
         dataMap["Bank balance"]?.subcategories?.find(
-          (item) => item.name === "Calculated bank balance"
-        )?.ACTUAL || 0
-      )
+          (item) => item.name === "Calculated bank balance",
+        )?.ACTUAL || 0,
+      ),
     );
 
     const frozenFunds = Math.abs(
-       Number(
+      Number(
         dataMap["Bank balance"]?.subcategories?.find(
-          (item) => item.name === "- Frozen funds  / provisions"
-        )?.ACTUAL || 0
-      )
+          (item) => item.name === "- Frozen funds  / provisions",
+        )?.ACTUAL || 0,
+      ),
     );
     const grossProfit = dataMap["Gross profit"]?.actual || 0;
 
@@ -250,9 +265,9 @@ export default function Cards() {
     const overheadCosts = Math.abs(
       Number(
         dataMap["Gross profit"]?.subcategories?.find(
-          (item) => item.name === "- Overhead / operational costs"
-        )?.ACTUAL || 0
-      )
+          (item) => item.name === "- Overhead / operational costs",
+        )?.ACTUAL || 0,
+      ),
     );
 
     // ✅ Step 4: Compute Net Cash Position
@@ -261,9 +276,9 @@ export default function Cards() {
     const costsOfGoodsSold = Math.abs(
       Number(
         dataMap["TOTAL TURNOVER"]?.subcategories?.find(
-          (item) => item.name === "- Costs of goods sold"
-        )?.ACTUAL || 0
-      )
+          (item) => item.name === "- Costs of goods sold",
+        )?.ACTUAL || 0,
+      ),
     );
 
     const netProfitMargin =

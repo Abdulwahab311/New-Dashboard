@@ -32,44 +32,65 @@ const SparkMini = ({
 );
 
 const StatCard = ({ title, value, note, change, header }) => (
-  <div className="rounded-lg overflow-hidden border border-[#252B42] flex flex-col h-full min-h-[120px]">
+  <div
+    className="group rounded-lg overflow-hidden border border-[#252B42] flex flex-col h-full min-h-[120px]
+    transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-pink-500/50"
+  >
     {header && (
       <div
-        className={`px-2 py-1 text-[8px] sm:text-[10px] font-semibold tracking-wider text-white ${header}`}
+        className={`px-2 py-1 text-[8px] sm:text-[10px] font-semibold tracking-wider text-white ${header}
+        transition-colors duration-300 group-hover:text-pink-300`}
       >
-        <div className="truncate">{title}</div>
+        <div className="truncate group-hover:whitespace-normal">{title}</div>
       </div>
     )}
-    <div className="bg-[#181C3A] p-2 sm:p-3 flex flex-col flex-1">
+
+    <div className="bg-[#181C3A] p-2 sm:p-3 flex flex-col flex-1 relative">
       {!header && (
-        <div className="text-[8px] sm:text-[10px] tracking-widest text-gray-300 mb-1 leading-tight line-clamp-2 min-h-[16px]">
-          {title.length > 20 ? `${title.substring(0, 17)}...` : title}
+        <div
+          className="text-[8px] sm:text-[10px] tracking-widest text-gray-300 mb-1 leading-tight line-clamp-2 min-h-[16px]
+          transition-all duration-300 group-hover:text-white group-hover:line-clamp-none"
+        >
+          {title}
         </div>
       )}
-      <div className="text-white text-sm sm:text-md font-semibold mb-1 flex-shrink-0">
+
+      {/* VALUE */}
+      <div
+        className="text-white text-sm sm:text-md font-semibold mb-1 flex-shrink-0
+        transition-transform duration-300 group-hover:scale-125"
+      >
         {value}
       </div>
+
+      {/* CHANGE + NOTE */}
       <div className="flex items-center justify-start gap-1 sm:gap-2 text-[7px] sm:text-[9px] mb-2 min-h-[16px]">
         {change && (
           <span
-            className={`font-medium rounded-md px-1 shrink-0 ${
+            className={`font-medium rounded-md px-1 shrink-0 transition-all duration-300 ${
               change.startsWith("-")
-                ? "text-red-400 bg-[#FF000024]"
-                : "text-green-400 bg-[#00D39424]"
+                ? "text-red-400 bg-[#FF000024] group-hover:bg-[#FF000040]"
+                : "text-green-400 bg-[#00D39424] group-hover:bg-[#00D39440]"
             }`}
           >
             {change}
           </span>
         )}
+
         {note && (
-          <span className="text-gray-400 truncate text-[6px] sm:text-[8px]">
-            {note.length > 15 ? `${note.substring(0, 12)}...` : note}
+          <span className="text-gray-400 truncate transition-all duration-300 group-hover:text-white group-hover:whitespace-normal">
+            {note}
           </span>
         )}
       </div>
-      <div className="h-6 sm:h-8 -mx-2 sm:-mx-5 -mb-2 sm:-mb-5 mt-auto flex items-center">
+
+      {/* Sparkline */}
+      <div className="h-6 sm:h-8 -mx-2 sm:-mx-5 -mb-2 sm:-mb-5 mt-auto flex items-center transition-opacity duration-300 group-hover:opacity-90">
         <SparkMini />
       </div>
+
+      {/* Glow overlay */}
+      <div className="pointer-events-none absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition duration-300 bg-pink-500/5" />
     </div>
   </div>
 );
@@ -280,10 +301,46 @@ export default function Marketing() {
       ];
 
       const staticForecastData = [
-        { month: "January", type: "ACTUAL", REVENUE: 650000, COGS: 180000, OVERHEAD: 120000, "NET CASH POSITION": 350000, NET_CASH: 500000, INCOME: 280000 },
-        { month: "February", type: "ACTUAL", REVENUE: 720000, COGS: 195000, OVERHEAD: 125000, "NET CASH POSITION": 400000, NET_CASH: 550000, INCOME: 310000 },
-        { month: "March", type: "FORECASTED", REVENUE: 680000, COGS: 185000, OVERHEAD: 118000, "NET CASH POSITION": 377000, NET_CASH: 520000, INCOME: 295000 },
-        { month: "April", type: "FORECASTED", REVENUE: 750000, COGS: 205000, OVERHEAD: 130000, "NET CASH POSITION": 415000, NET_CASH: 580000, INCOME: 325000 },
+        {
+          month: "January",
+          type: "ACTUAL",
+          REVENUE: 650000,
+          COGS: 180000,
+          OVERHEAD: 120000,
+          "NET CASH POSITION": 350000,
+          NET_CASH: 500000,
+          INCOME: 280000,
+        },
+        {
+          month: "February",
+          type: "ACTUAL",
+          REVENUE: 720000,
+          COGS: 195000,
+          OVERHEAD: 125000,
+          "NET CASH POSITION": 400000,
+          NET_CASH: 550000,
+          INCOME: 310000,
+        },
+        {
+          month: "March",
+          type: "FORECASTED",
+          REVENUE: 680000,
+          COGS: 185000,
+          OVERHEAD: 118000,
+          "NET CASH POSITION": 377000,
+          NET_CASH: 520000,
+          INCOME: 295000,
+        },
+        {
+          month: "April",
+          type: "FORECASTED",
+          REVENUE: 750000,
+          COGS: 205000,
+          OVERHEAD: 130000,
+          "NET CASH POSITION": 415000,
+          NET_CASH: 580000,
+          INCOME: 325000,
+        },
       ];
 
       const staticCosts = [
@@ -295,18 +352,28 @@ export default function Marketing() {
         { category: "Equipment", ACTUAL: 10000 },
       ];
 
-      const totalTurnSum = staticFinancialData.reduce((sum, item) => sum + item.actual, 0);
-      const totalOverhead = staticCosts.reduce((sum, item) => sum + item.ACTUAL, 0);
+      const totalTurnSum = staticFinancialData.reduce(
+        (sum, item) => sum + item.actual,
+        0,
+      );
+      const totalOverhead = staticCosts.reduce(
+        (sum, item) => sum + item.ACTUAL,
+        0,
+      );
       const grossRevenue = 770000;
       const productCosts = 195000;
-      const grossMargin = ((grossRevenue - productCosts) / grossRevenue * 100).toFixed(1);
+      const grossMargin = (
+        ((grossRevenue - productCosts) / grossRevenue) *
+        100
+      ).toFixed(1);
       const operationalCosts = 135000;
       const ebitda = 440000;
       const operationalMargin = ((ebitda / grossRevenue) * 100).toFixed(1);
       const netProfit = 385000;
-      const netProfitMargin = totalTurnSum - totalOverhead > 0
-        ? ((netProfit / (totalTurnSum - totalOverhead)) * 100).toFixed(1)
-        : 0;
+      const netProfitMargin =
+        totalTurnSum - totalOverhead > 0
+          ? ((netProfit / (totalTurnSum - totalOverhead)) * 100).toFixed(1)
+          : 0;
       const netCashPosition = 575000;
 
       setStats({
@@ -470,7 +537,7 @@ export default function Marketing() {
                           <td className="px-2 sm:px-3 py-2 text-right whitespace-nowrap">
                             {item?.actual
                               ? `€${Number(item.actual).toLocaleString(
-                                  "en-US"
+                                  "en-US",
                                 )}`
                               : "-"}
                           </td>
@@ -532,7 +599,7 @@ export default function Marketing() {
           <h1 className="mt-3 text-sm sm:text-lg font-semibold">Costs</h1>
           <div className="grid grid-cols-1 lg:grid-cols-[70%_30%] p-1 gap-2 mt-2">
             <div className="bg-[#181C3A] rounded-xl p-2">
-              <div className="h-[200px] sm:h-[220px]">
+              <div className="">
                 <Wavechart />
               </div>
             </div>
@@ -737,7 +804,7 @@ export default function Marketing() {
                         "REVENUE",
                         "revenue",
                         "ACTUAL",
-                        "actual_revenue"
+                        "actual_revenue",
                       );
                       const cogs = pickNumber("COGS", "cogs");
                       const overhead = pickNumber("OVERHEAD", "overhead");
@@ -745,7 +812,7 @@ export default function Marketing() {
                       const netCash = pickNumber(
                         "NET_CASH",
                         "net_cash",
-                        "NET_CASH_POSITION"
+                        "NET_CASH_POSITION",
                       );
                       const income = pickNumber("INCOME", "income");
 

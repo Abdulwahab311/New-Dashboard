@@ -52,12 +52,12 @@ const QuarterGoalChart = () => {
 
         {/* RESPONSIVE LEGEND */}
         <div className="flex flex-wrap gap-x-4 gap-y-2 max-w-full">
-          <LegendItem color="#22D3EE" label="SALES" />
-          <LegendItem color="#9333EA" label="1e CONTRACTFASE" />
-          <LegendItem color="#10B981" label="DEVELOPMENT" />
-          <LegendItem color="#F59E0B" label="2e CONTRACTFASE" />
-          <LegendItem color="#EF4444" label="EXIT" />
-          <LegendItem color="#94A3B8" label="NA-ZORG" />
+          <LegendItem color="#22D3EE" label="ZORG OVDR - CC & DEV" />
+          <LegendItem color="#9333EA" label="ZORG CC & DEV" />
+          <LegendItem color="#10B981" label="ZORG PAS & REG" />
+          <LegendItem color="#F59E0B" label="INDUSTRIE OVDR - CC & DEV" />
+          <LegendItem color="#EF4444" label="INDUSTRY CC & DEV" />
+          <LegendItem color="#94A3B8" label="INDUSTRY PAS & REG" />
         </div>
       </div>
 

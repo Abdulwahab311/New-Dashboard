@@ -35,7 +35,7 @@ export default function ScalingChart() {
     "DECEMBER",
   ];
 
-  const yTicks = ["10M", "5M", "1M", "500K", "100K", "50K"];
+  const yTicks = ["€700K", "€600K", "€500K", "€400K", "€300K", "€200K"];
 
   useEffect(() => {
     const fetchFinanceData = async () => {

@@ -6,7 +6,10 @@ const PillarCard = ({ item }) => {
   const progressPercent = Math.min((item.goal / item.now) * 100, 100);
 
   return (
-    <div className="text-white flex flex-col h-[340px]">
+    <div
+      className="text-white flex flex-col h-[340px]
+"
+    >
       {/* GOAL */}
       <div
         className="rounded-xl p-2 mb-2"
@@ -31,7 +34,7 @@ const PillarCard = ({ item }) => {
         {/* GREEN FILL */}
         <div className="absolute bottom-2 left-2 right-2 top-2 flex items-end">
           <div
-            className="w-full bg-[#6FE04F] rounded-lg transition-all duration-500"
+            className="w-full bg-[#00D351] rounded-lg transition-all duration-500"
             style={{ height: `${progressPercent}%` }}
           />
         </div>
