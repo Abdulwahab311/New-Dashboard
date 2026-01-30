@@ -21,9 +21,9 @@ import FunnelDashboard from "./funnelDashboard/pages/FunnelDashboard.jsx";
 import FunnelLayout from "./New2industryContractPhase/layout/Layout.jsx";
 
 import Saledashboard from "./Salesdashboard/pages/SalesDashboard.jsx"
-import Saledashboardlayout from "./New2industryContractPhase/layout/Layout.jsx"
+import Saledashboardlayout from "./Salesdashboard/layout/Layout.jsx"
 import Industrydashboard from "./IndustryDashboard/pages/SalesDashboard.jsx"
-import Industrydashboardlayout from "./New2industryContractPhase/layout/Layout.jsx"
+import Industrydashboardlayout from "./IndustryDashboard/layout/Layout.jsx"
 const App = () => {
   return (
     <Router>

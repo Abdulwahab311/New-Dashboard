@@ -48,18 +48,18 @@ const SalesRep = ({ sales }) => {
   ================================= */
   const repsData = [
     {
-      salesRep: "John Smith",
-      revenue: 125000,
+      salesRep: "Samuel",
+      revenue: 470000,
       rank: 1,
     },
     {
-      salesRep: "Emma Watson",
-      revenue: 98000,
+      salesRep: "Tom",
+      revenue: 470000,
       rank: 2,
     },
     {
-      salesRep: "Michael Brown",
-      revenue: 76000,
+      salesRep: "Abdul",
+      revenue: 470000,
       rank: 3,
     },
   ];
@@ -100,7 +100,7 @@ const SalesRep = ({ sales }) => {
               <div className="mt-6 text-white text-4xl font-bold tracking-wide">
                 {Math.round(rep.revenue / 1000) + "k"}
               </div>
-              <div className="mt-1 text-gray-300 text-lg">
+              <div className="mt-1 text-gray-300 text-2xl">
                 {rep.salesRep}
               </div>
             </div>

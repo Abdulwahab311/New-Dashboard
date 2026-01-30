@@ -1,133 +1,142 @@
 import React from 'react';
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, ReferenceLine } from 'recharts';
 
 const TopBadge = ({ value }) => (
-  <div className="h-8 px-8 border border-white rounded-md flex items-center justify-center text-white text-sm tracking-wide">
+  <div className="h-8 px-8 border border-white rounded-md flex items-center justify-center text-white text-sm tracking-wide bg-transparent">
     {value !== null && value !== undefined ? value : ''}
   </div>
 );
-
 
 const BottomBadge = ({ value }) => {
   const [num, unitRaw] = String(value).trim().split(/\s+/);
   const unit = unitRaw || 'D';
   return (
-    <div className="h-8 px-5 border border-white/80 rounded-md flex items-center justify-center text-white text-sm font-semibold">
+    <div className="h-8 px-5 border border-white/80 rounded-md flex items-center justify-center text-white text-sm font-semibold bg-transparent">
       <span className="tabular-nums mr-1">{num}</span>
       <span className="opacity-90 tracking-wide">{unit}</span>
     </div>
   );
 };
 
-const DurationRecharts = ({ sales }) => {
-  const propDuration = sales?.data?.[0]?.proposalDuration || [];
-  console.log("Your First Proposal Duration:", propDuration);
-
-  // Filter out placeholder stages if needed
-  const filteredStages = propDuration.filter(stage => stage.durationDays > 0);
-
-  // Calculate total duration
-  const totalDuration = filteredStages.reduce((sum, stage) => sum + stage.durationDays, 0);
-
-  // Calculate total deals
-  const totalDeals = filteredStages.reduce((sum, stage) => sum + stage.amountOfDeals, 0);
-  console.log("your total deasls:",totalDeals);
-
-  // Combine total duration/deals with dynamic stages
-  const displayStages = [
-    {
-      key: 'total',
-      title: ['TOTAL DURATION', 'FIRST PROPOSAL'],
-      valueTop: totalDeals, // show total deals here
-      days: `${totalDuration} D`,
-      pos: totalDuration,
-      neg: -totalDuration,
-    },
-    ...filteredStages.map(stage => ({
-      key: stage._id,
-      title: [stage.stage],
-      valueTop: stage.amountOfDeals, // individual deals
-      days: `${stage.durationDays} D`,
-      pos: stage.durationDays,
-      neg: -stage.durationDays,
-    }))
+const DurationRecharts = () => {
+  // First card data (lead stages) - matching the image
+  const leadStagesData = [
+    { stage: "LEAD", category: "", deals: 2, duration: "2" },
+    { stage: "Afspraak / online meeting", category: "(lead)", deals: 2, duration: "2" },
+    { stage: "Plattegrond opgevraagd", category: "(lead)", deals: 2, duration: "2" },
+    { stage: "Plattegrond ontvangen", category: "(lead)", deals: 2, duration: "2" },
+    { stage: "Plattegrond intekenen - Alice", category: "(lead)", deals: 2, duration: "2" },
+    { stage: "Stiko maken", category: "(lead)", deals: 2, duration: "2" },
   ];
 
-  // Chart data for Recharts
-  const chartData = displayStages.map(s => ({ name: s.key, pos: s.pos, neg: s.neg }));
+  // Second card data (other stages) - matching the image
+  const otherStagesData = [
+  { stage: "LEAD", category: "", deals: 2, duration: "2" },
+    { stage: "Afspraak / online meeting", category: "(lead)", deals: 2, duration: "2" },
+    { stage: "Plattegrond opgevraagd", category: "(lead)", deals: 2, duration: "2" },
+    { stage: "Plattegrond ontvangen", category: "(lead)", deals: 2, duration: "2" },
+    { stage: "Plattegrond intekenen - Alice", category: "(lead)", deals: 2, duration: "2" },
+    { stage: "Stiko maken", category: "(lead)", deals: 2, duration: "2" },
+  ];
 
-  // Vertical ticks
-  const verticalTicks = Array.from({ length: 9 }, (_, i) => 16 - i * 2); // [16,14,12,...,0]
+  // For chart data
+  const leadChartData = leadStagesData.map((stage, index) => ({
+    name: `lead-${index}`,
+    pos: 2,
+    neg: -2,
+  }));
 
-  return (
-    <div className="bg-[#0B1020] rounded-xl border border-[#252B42] p-4">
-      <div className="text-white text-lg font-semibold mb-2">Duration To First Proposal</div>
+  const otherChartData = otherStagesData.map((stage, index) => ({
+    name: `other-${index}`,
+    pos: 2,
+    neg: -2,
+  }));
 
+  // Vertical ticks for Y-axis
+  const verticalTicks = Array.from({ length: 9 }, (_, i) => 16 - i * 2);
+
+  // Card component to avoid duplication
+  const StageCard = ({ stagesData, chartData }) => (
+    <div className="bg-[#0B1020] rounded-xl border border-[#252B42] p-4 mb-6">
       <div className="grid grid-cols-12 gap-4">
-        {/* Left axis/labels */}
-        <div className="col-span-2 flex flex-col justify-between py-4 mt-10">
-          <div className="text-gray-300 text-sm leading-5">
+        {/* Left column: AMOUNT OF DEALS and DURATION TIME labels */}
+        <div className="col-span-2 flex flex-col justify-between py-4 mt-8">
+          <div className="text-gray-300 text-xs leading-5">
             <div className="font-semibold mb-1">AMOUNT</div>
             <div>OF DEALS</div>
           </div>
-          <div className="text-gray-300 text-sm leading-5 mb-10">
+          <div className="text-gray-300 text-xs leading-5 mt-32">
             <div className="font-semibold mb-1">DURATION</div>
-            <div>TIME</div>
+            <div>TIME (DAYS)</div>
           </div>
         </div>
 
-        {/* Chart area */}
+        {/* Main chart area */}
         <div className="col-span-10 relative">
-          {/* Vertical ticks */}
-          <div className="absolute -left-5 top-22 flex flex-col h-[200px] justify-between text-white text-[9px] font-semibold">
+          {/* Vertical ticks on left */}
+          {/* <div className="absolute -left-5 top-16 flex flex-col h-[200px] justify-between text-white text-[9px] font-semibold">
             {verticalTicks.map((v, i) => <div key={i}>{v}</div>)}
-          </div>
+          </div> */}
 
-          {/* Top badges and stage titles */}
-          <div className="grid grid-cols-5 gap-8 pl-4 pr-2">
-            {displayStages.map(stage => (
-              <div key={stage.key} className="flex flex-col items-center">
-                <div className="h-14 text-center mb-2 text-slate-300 text-[11px] leading-4 tracking-wide">
-                  {stage.title.map((t, i) => (
-                    <div key={i}>{t}</div>
-                  ))}
+          {/* Grid for stages */}
+          <div className={`grid gap-4 pl-4 pr-2 ${stagesData.length === 6 ? 'grid-cols-6' : 'grid-cols-7'}`}>
+            {stagesData.map((stage, index) => (
+              <div key={index} className="flex flex-col items-center">
+                {/* Stage title */}
+                <div className="h-12 text-center mb-2 text-slate-300 text-[10px] leading-3 tracking-wide">
+                  <div className="font-semibold mb-1">{stage.stage}</div>
+                  {stage.category && <div className="text-slate-400">{stage.category}</div>}
                 </div>
+                {/* Top badge with deals count */}
                 <div className="mb-2">
-                  <TopBadge value={stage.valueTop} />
+                  <TopBadge value={stage.deals} />
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Bar chart */}
-          <div className="pl-4 pr-2">
-            <div style={{ height: 220 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={chartData}
-                  margin={{ top: 8, right: 8, left: 8, bottom: 8 }}
-                  stackOffset="sign"
-                >
-                  <YAxis hide domain={[-16, 16]} />
-                  <XAxis dataKey="name" hide />
-                  <ReferenceLine y={0} stroke="rgba(148,163,184,0.4)" />
-                  <Bar dataKey="neg" stackId="a" fill="#cf2e2e" isAnimationActive={false} />
-                  <Bar dataKey="pos" stackId="a" fill="#d69a2b" isAnimationActive={false} />
-                </BarChart>
-              </ResponsiveContainer>
+          {/* Simple vertical lines */}
+          <div className="">
+            <div className="relative" style={{ height: 100 }}>
+              {/* Center horizontal line */}
+              <div className="absolute left-0 right-0 top-1/2 border-t border-slate-600"></div>
+              
+              {/* Vertical lines for each stage */}
+              {/* <div className={`grid gap-4 h-full ${stagesData.length === 6 ? 'grid-cols-6' : 'grid-cols-7'}`}>
+                {stagesData.map((stage, index) => (
+                  <div key={index} className="flex items-center justify-center h-full">
+                    <div className="w-[2px] h-full bg-slate-600"></div>
+                  </div>
+                ))}
+              </div> */}
             </div>
           </div>
 
-          {/* Bottom badges */}
-          <div className="grid grid-cols-5 gap-8 pl-4 pr-2 mt-3">
-            {displayStages.map(stage => (
-              <div key={stage.key} className="flex items-center justify-center">
-                <BottomBadge value={stage.days} />
+          {/* Bottom badges with duration */}
+          <div className={`grid gap-4 pl-4 pr-2 mt-2 ${stagesData.length === 6 ? 'grid-cols-6' : 'grid-cols-7'}`}>
+            {stagesData.map((stage, index) => (
+              <div key={index} className="flex items-center justify-center">
+                <BottomBadge value={stage.duration} />
               </div>
             ))}
           </div>
         </div>
       </div>
+    </div>
+  );
+
+  return (
+    <div className=" bg-[#050A18] p-8">
+      {/* First card - Lead stages (6 columns) */}
+      <StageCard 
+        stagesData={leadStagesData}
+        chartData={leadChartData}
+      />
+      
+      {/* Second card - Other stages (7 columns) */}
+      <StageCard 
+        stagesData={otherStagesData}
+        chartData={otherChartData}
+      />
     </div>
   );
 };
