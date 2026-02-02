@@ -24,6 +24,9 @@ import Saledashboard from "./Salesdashboard/pages/SalesDashboard.jsx"
 import Saledashboardlayout from "./Salesdashboard/layout/Layout.jsx"
 import Industrydashboard from "./IndustryDashboard/pages/SalesDashboard.jsx"
 import Industrydashboardlayout from "./IndustryDashboard/layout/Layout.jsx"
+
+import Buisnesslayout from "./Business/layout/Layout.jsx"
+import Buisnessdashboard from "./Business/pages/BusinessModelDashboard.jsx"
 const App = () => {
   return (
     <Router>
@@ -114,6 +117,14 @@ const App = () => {
             <Industrydashboardlayout>
               <Industrydashboard />
             </Industrydashboardlayout>
+          }
+        />
+        <Route
+          path="/buisness/dashboard"
+          element={
+            <Buisnesslayout>
+              <Buisnessdashboard />
+            </Buisnesslayout>
           }
         />
       </Routes>

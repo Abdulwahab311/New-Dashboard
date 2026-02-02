@@ -179,22 +179,21 @@ const DurationQuarter = () => {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          {/* Total Duration Pills */}
-          <div>
+         {/* Total Duration Pills */}
+          <div className="w-full mb-4 mt-3 ml-4">
             <h2 className="text-sm md:text-base font-semibold mb-2">
               Total Duration
             </h2>
-            <div className="flex gap-3">
-              <div className="px-5 md:px-6 py-2 md:py-2.5 rounded-full bg-[#28A72C] text-center">
+            <div className="flex justify-between gap-2">
+              <div className="px-4 md:px-6 py-2 md:py-2.5 rounded-full bg-[#28A72C] text-center flex-1 max-w-[48%]">
                 <div className="text-xs font-medium whitespace-nowrap">
                   Goal: {avgGoal} Days
                 </div>
               </div>
-              <div className="px-5 md:px-6 py-2 md:py-2.5 rounded-full bg-[#F1494C] text-center flex flex-col items-center gap-1">
+              <div className="px-4 md:px-6 py-2 md:py-2.5 rounded-full bg-[#F1494C] text-center flex-1 max-w-[48%] flex flex-col items-center gap-1">
                 <div className="text-xs font-semibold text-white whitespace-nowrap">
                   Now: {avgDuration} Days
                 </div>
-
                 <div className="flex items-center gap-1 text-green-400 text-[11px] font-medium">
                   <span>+2%</span>
                   <span>↗</span>

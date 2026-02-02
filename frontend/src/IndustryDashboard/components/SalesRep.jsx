@@ -1,7 +1,6 @@
 import React from "react";
 
-const img=  "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?q=80&w=512&auto=format&fit=crop";
-
+const img = "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?q=80&w=512&auto=format&fit=crop";
 
 const RankBadge = ({ rank, color = "#f59e0b" }) => (
   <div
@@ -31,19 +30,6 @@ const SalesRep = ({ sales }) => {
   console.log("API sales rep data (currently unused):", sales);
 
   /* ================================
-     ❌ API DATA (COMMENTED)
-  =================================
-  const salesRep = sales?.data?.[0]?.revenuePerRep || [];
-  const repsData = salesRep
-    .filter((r) => r.salesRep !== "Sales Rep")
-    .sort((a, b) => b.revenue - a.revenue)
-    .map((r, idx) => ({
-      ...r,
-      rank: idx + 1,
-    }));
-  */
-
-  /* ================================
      ✅ STATIC DATA (UI SAME)
   ================================= */
   const repsData = [
@@ -65,51 +51,52 @@ const SalesRep = ({ sales }) => {
   ];
 
   return (
-    <div className="bg-[#090D28] rounded-xl border p-4">
+    <div className="bg-[#090D28] rounded-xl border p-4 h-full flex flex-col">
       <div className="text-white text-sm font-semibold">
         Revenue Trough The Sales Rep
       </div>
-      <div className="text-gray-400 text-xs mb-6">This Month</div>
+      <div className="text-gray-400 text-xs mb-4">This Month</div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start justify-items-center">
-        {repsData.map((rep) => {
-          const ringColor =
-            rep.rank === 1
-              ? "#f59e0b"
-              : rep.rank === 2
-              ? "#94a3b8"
-              : "#fbbf24";
+      <div className="flex-1 flex items-center justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start justify-items-center w-full">
+          {repsData.map((rep) => {
+            const ringColor =
+              rep.rank === 1
+                ? "#f59e0b"
+                : rep.rank === 2
+                ? "#94a3b8"
+                : "#fbbf24";
 
-          const badgeColor =
-            rep.rank === 1
-              ? "#f59e0b"
-              : rep.rank === 2
-              ? "#cbd5e1"
-              : "#f59e0b";
+            const badgeColor =
+              rep.rank === 1
+                ? "#f59e0b"
+                : rep.rank === 2
+                ? "#cbd5e1"
+                : "#f59e0b";
 
-          return (
-            <div key={rep.salesRep} className="flex flex-col items-center">
-              <div className="relative">
-                <Avatar
-                  src={img || "https://via.placeholder.com/150"}
-                  ringColor={ringColor}
-                />
-                <RankBadge rank={rep.rank} color={badgeColor} />
+            return (
+              <div key={rep.salesRep} className="flex flex-col items-center">
+                <div className="relative">
+                  <Avatar
+                    src={img || "https://via.placeholder.com/150"}
+                    ringColor={ringColor}
+                  />
+                  <RankBadge rank={rep.rank} color={badgeColor} />
+                </div>
+
+                <div className="mt-6 text-white text-4xl font-bold tracking-wide">
+                  {Math.round(rep.revenue / 1000) + "k"}
+                </div>
+                <div className="mt-1 text-gray-300 text-2xl">
+                  {rep.salesRep}
+                </div>
               </div>
-
-              <div className="mt-6 text-white text-4xl font-bold tracking-wide">
-                {Math.round(rep.revenue / 1000) + "k"}
-              </div>
-              <div className="mt-1 text-gray-300 text-2xl">
-                {rep.salesRep}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
 };
 
 export default SalesRep;
-
